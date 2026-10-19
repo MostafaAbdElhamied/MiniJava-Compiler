@@ -18,7 +18,7 @@ You are **Member 3**, the **Symbol Table Engineer and Official Course Deliverabl
    - Author the official input text file required for Phase 1 submission (*PDF p. 5*).
    - Must contain diverse, comprehensive Mini Java test programs demonstrating valid constructs, all token types, comments, and the 4 required lexical error categories.
 3. **Official Phase 1 Technical Report (`docs/phase1_report.md`):**
-   - Author the official 1–2 page technical report required for Phase 1 submission (*PDF p. 5*).
+   - Author the official 1-2 page technical report required for Phase 1 submission (*PDF p. 5*).
    - Must clearly answer the 3 mandatory questions:
      - (1) Tokens implemented.
      - (2) How errors were handled.
@@ -141,7 +141,7 @@ def format_identifier_table(table: IdentifierTable) -> str:
      - Program 7: Unclosed string literal errors.
      - Program 8: Unclosed multi-line comment errors.
 4. **Author Phase 1 Technical Report (`docs/phase1_report.md`):**
-   - Draft a professional 1–2 page markdown report complying with *PDF p. 5*:
+   - Draft a professional 1-2 page markdown report complying with *PDF p. 5*:
      - **Title & Metadata:** Course CSCI415, Project Title, Team Members, Date.
      - **1. Tokens Implemented:** Detailed breakdown of all 15 keywords, literal rules (`NUMBER`, `STRING`, `BOOLEAN`), operators (`MATHOP`, `LOGOP`, `ASSIGN`), delimiters, and `EOF`.
      - **2. How Errors Were Handled:** Explanation of 1-based coordinate tracking, descriptive error messages, non-halting scanning to capture all errors, and exact error reproduction.

@@ -12,7 +12,7 @@ You are **Member 1**, the **Lead Architect, Token Infrastructure Engineer, Diagn
 1. **Core Token System (`minijava/tokens.py`):**
    - Implement the immutable token specification: `TokenType` enum (30 categories), frozen `Token` dataclass with `format()` and `describe()`, `KEYWORDS` dictionary, operator tables (`MATH_OPERATORS`, `LOGICAL_OPERATORS`), and `DELIMITERS`.
 2. **Diagnostic Engine (`minijava/diagnostics.py`):**
-   - Implement the error reporting framework: `Phase`, `ErrorCode`, `Diagnostic` dataclass, message templates matching PDF p. 3–4 verbatim, and the `make_diagnostic()` factory function.
+   - Implement the error reporting framework: `Phase`, `ErrorCode`, `Diagnostic` dataclass, message templates matching PDF p. 3-4 verbatim, and the `make_diagnostic()` factory function.
 3. **CLI Driver & Report Formatter (`minijava/driver.py` & `minijava/__main__.py`):**
    - Implement source file loading with UTF-8-BOM normalization and universal newlines.
    - Coordinate Phase 1 execution (`Lexer.tokenize()`).

@@ -1,4 +1,4 @@
-# Mini Java Compiler (CSCI415 — Fall 2026)
+# Mini Java Compiler (CSCI415 - Fall 2026)
 
 [![Language](https://img.shields.io/badge/Language-Python%203.10%2B-blue.svg)](https://www.python.org/)
 [![Course](https://img.shields.io/badge/Course-CSCI415%20Compiler%20Design-green.svg)](Projects/ProjectGuidelinesAndDetails.pdf)
@@ -9,25 +9,25 @@
 A modular, hand-crafted compiler front-end for **Mini Java** (a simplified, statically-typed Java-like language), developed for **CSCI415: Compiler Design** at university.
 
 The project is structured into three progressive phases:
-- **Phase 01: Lexical Analyzer (Scanner)** — *Active* (Deadline: **October 30, 2026**)
-- **Phase 02: Syntax Analyzer (Parser)** — *Starts Nov 21, 2026*
-- **Phase 03: Semantic Analyzer (Type & Scope Checker)** — *Starts Nov 21, 2026*
+- **Phase 01: Lexical Analyzer (Scanner)** - *Active* (Deadline: **October 30, 2026**)
+- **Phase 02: Syntax Analyzer (Parser)** - *Starts Nov 21, 2026*
+- **Phase 03: Semantic Analyzer (Type & Scope Checker)** - *Starts Nov 21, 2026*
 
 ---
 
-## 📋 Table of Contents
-- [Project Overview](#-project-overview)
-- [Phase 1: Lexical Analysis Scope](#-phase-1-lexical-analysis-scope)
-- [Team Roles and Task Allocation](#-team-roles-and-task-allocation)
-- [Repository Structure](#-repository-structure)
-- [Installation and Execution](#-installation-and-execution)
-- [Diagnostic and Error Handling](#-diagnostic-and-error-handling)
-- [Testing Strategy](#-testing-strategy)
-- [Academic Integrity Notice](#-academic-integrity-notice)
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Phase 1: Lexical Analysis Scope](#phase-1-lexical-analysis-scope)
+- [Team Roles and Task Allocation](#team-roles-and-task-allocation)
+- [Repository Structure](#repository-structure)
+- [Installation and Execution](#installation-and-execution)
+- [Diagnostic and Error Handling](#diagnostic-and-error-handling)
+- [Testing Strategy](#testing-strategy)
+- [Academic Integrity Notice](#academic-integrity-notice)
 
 ---
 
-## 🎯 Project Overview
+## Project Overview
 
 Mini Java is a case-sensitive, object-oriented language supporting primitive types (`int`, `float`, `boolean`, `char`, `String`), single-dimensional arrays, arithmetic and relational expressions, control flow (`if`/`else`, `while`, `for`), and class/method declarations.
 
@@ -38,7 +38,7 @@ Mini Java is a case-sensitive, object-oriented language supporting primitive typ
 
 ---
 
-## 🔍 Phase 1: Lexical Analysis Scope
+## Phase 1: Lexical Analysis Scope
 
 The Phase 1 scanner converts raw source code character-by-character into a stream of tokens while tracking 1-based source coordinates (`line` and `column`):
 
@@ -57,7 +57,7 @@ The Phase 1 scanner converts raw source code character-by-character into a strea
 
 ---
 
-## 👥 Team Roles and Task Allocation
+## Team Roles and Task Allocation
 
 Work is divided across five distinct roles to ensure balanced implementation:
 
@@ -65,13 +65,13 @@ Work is divided across five distinct roles to ensure balanced implementation:
 |---|---|---|---|
 | **Member 1** | **Architect & CLI Integration Lead** | `minijava/tokens.py`<br>`minijava/diagnostics.py`<br>`minijava/driver.py`<br>`tests/helpers.py`<br>`tests/test_contract.py` | Token definitions, diagnostic factory, CLI driver, report formatter, and reflection tests. |
 | **Member 2** | **Lexer Engine Core** | `minijava/lexer.py`<br>`tests/test_lexer_core.py` | Central `Lexer` loop, cursor navigation, whitespace, comments, delimiters, and EOF token. |
-| **Member 3** | **Symbol Table & Submission Lead** | `minijava/symbol_table.py`<br>`tests/test_symbol_table.py`<br>`samples/phase1_tests.txt`<br>`docs/phase1_report.md` | `IdentifierTable`, formatting, test programs deliverable, and official 1–2 page technical report. |
+| **Member 3** | **Symbol Table & Submission Lead** | `minijava/symbol_table.py`<br>`tests/test_symbol_table.py`<br>`samples/phase1_tests.txt`<br>`docs/phase1_report.md` | `IdentifierTable`, formatting, test programs deliverable, and official 1-2 page technical report. |
 | **Member 4** | **Scanner Specialist: Identifiers & Numbers** | `minijava/scanner_ident_num.py`<br>`tests/test_scanner_ident_num.py`<br>`tests/test_pdf_examples.py` | Identifiers, keywords, float/int literals, digit-prefixed invalid identifier detection (`1name`), PDF regression suite. |
 | **Member 5** | **Scanner Specialist: Strings & Operators** | `minijava/scanner_str_op.py`<br>`tests/test_scanner_str_op.py`<br>`tests/golden/lex/*` | String literals, escape sequences, operator maximal munch, and independent golden test cases. |
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 CompilerProject/
@@ -108,17 +108,17 @@ CompilerProject/
 │   ├── test_symbol_table.py              # Symbol table unit tests
 │   ├── test_scanner_ident_num.py         # Identifier and number tests
 │   ├── test_scanner_str_op.py            # String and operator tests
-│   ├── test_pdf_examples.py              # Exact PDF p. 3–5 regression suite
+│   ├── test_pdf_examples.py              # Exact PDF p. 3-5 regression suite
 │   └── golden/lex/                       # Independent golden test cases (*.mj + *.out)
 ├── samples/
 │   └── phase1_tests.txt                  # Official test input programs deliverable
 └── docs/
-    └── phase1_report.md                  # Official 1–2 page technical report deliverable
+    └── phase1_report.md                  # Official 1-2 page technical report deliverable
 ```
 
 ---
 
-## 🚀 Installation and Execution
+## Installation and Execution
 
 ### Requirements
 - **Python ≥ 3.10** (standard library only)
@@ -142,9 +142,9 @@ python3 -m minijava samples/phase1_tests.txt --phase lex --symbols
 
 ---
 
-## ⚠️ Diagnostic and Error Handling
+## Diagnostic and Error Handling
 
-All diagnostics report 1-based coordinates with descriptive messages matching the course guidelines (*PDF p. 3–4*):
+All diagnostics report 1-based coordinates with descriptive messages matching the course guidelines (*PDF p. 3-4*):
 
 ```
 Error: invalid character '@' at line 1, column 12.
@@ -155,7 +155,7 @@ Error: unclosed comment starting at line 1, column 1.
 
 ---
 
-## 🧪 Testing Strategy
+## Testing Strategy
 
 The repository includes a comprehensive 4-layer testing suite:
 
@@ -166,13 +166,13 @@ python3 -m unittest discover -s tests -v
 # Run contract reflection verification
 python3 -m unittest tests.test_contract -v
 
-# Run official PDF p. 3–5 acceptance suite
+# Run official PDF p. 3-5 acceptance suite
 python3 -m unittest tests.test_pdf_examples -v
 ```
 
 ---
 
-## ⚖️ Academic Integrity Notice
+## Academic Integrity Notice
 
 This project is an original clean-room implementation created for **CSCI415 Compiler Design**. In accordance with university policy:
 - No code has been copied from third-party or student repositories.

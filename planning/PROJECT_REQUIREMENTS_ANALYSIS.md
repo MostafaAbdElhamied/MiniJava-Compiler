@@ -1,6 +1,6 @@
 # Mini Java Compiler: Comprehensive Requirements Analysis
 
-**Course:** CSCI415 – Compiler Design (Fall 2026)  
+**Course:** CSCI415 - Compiler Design (Fall 2026)  
 **Project Title:** Mini Compiler for a Java-like Language (Mini Java)  
 **Authoritative Specification:** `/home/yousefmahmoudali/Desktop/CompilerProject/Projects/ProjectGuidelinesAndDetails.pdf` (5 pages)  
 **Project Workspace:** `/home/yousefmahmoudali/Desktop/CompilerProject/`  
@@ -53,7 +53,7 @@ The project timeline is defined on *PDF p. 1*:
   - **Prohibited:** Standard library shortcuts that bypass compiler fundamentals (e.g., Python's `re` regular expressions for lexing, `tokenize`, `ast`, `shlex`, or naive `str.split()` / `str.find()` token splitting).
   - **Mandatory:** The lexical analyzer must be hand-coded, processing source characters sequentially using an index/cursor. The syntax analyzer must be a hand-coded recursive-descent parser.
 - **Academic Integrity & Oral Examination:**
-  *PDF p. 1–2* explicitly states:
+  *PDF p. 1-2* explicitly states:
   - *"A discussion will be held with ALL team members; all members must participate in implementation."*
   - *"ANY PLAGIARISM DETECTED WILL LEAD TO A ZERO AND NO DISCUSSION WILL BE CONDUCTED FOR THE TEAM."*
   Every team member must be able to walk through and explain their code during the oral grading interview.
@@ -98,7 +98,7 @@ The language specifies 9 standard delimiters:
 The PDF specifies *"Arithmetic and comparison operators"*, with concrete assignments evidenced in the sample output:
 - Arithmetic (`MATHOP`): `+`, `-`, `*`, `/`, `%`
 - Relational / Logical (`LOGOP`): `==`, `!=`, `<`, `>`, `<=`, `>=`, `&&`, `||`, `!`
-- Assignment (`ASSIGN`): `=` (sample output *PDF p. 4–5* maps `=` to `ASSIGN`, while `>=` maps to `LOGOP` and `+` maps to `MATHOP`).
+- Assignment (`ASSIGN`): `=` (sample output *PDF p. 4-5* maps `=` to `ASSIGN`, while `>=` maps to `LOGOP` and `+` maps to `MATHOP`).
 
 #### Comments (*PDF p. 3*)
 - Single-line comments: begin with `//` and extend to the end of the line.
@@ -108,12 +108,12 @@ The PDF specifies *"Arithmetic and comparison operators"*, with concrete assignm
 ---
 
 ### 1.5 Diagnostic and Error Reporting Requirements
-The compiler must detect, format, and report errors across all phases (*PDF p. 3–4*). Every error diagnostic must include:
+The compiler must detect, format, and report errors across all phases (*PDF p. 3-4*). Every error diagnostic must include:
 1. Line number (1-based)
 2. Column number (1-based)
 3. A descriptive, precise error message
 
-**Required Lexical Error Forms (*PDF p. 3–4*):**
+**Required Lexical Error Forms (*PDF p. 3-4*):**
 1. **Unknown or invalid symbols:**
    *Example:* `int x = 10 @ 5;`  
    *Output:* `Error: invalid character '@' at line 1, column 12.`
@@ -151,9 +151,9 @@ The compiler must detect, format, and report errors across all phases (*PDF p. 3
 | **REQ-16** | Operators: Arithmetic and comparison | Mandatory | p. 3 | Maximal-munch operator scanner (`MATHOP`, `LOGOP`, `ASSIGN`) | Unit tests for binary and unary operators, two-char operators (`==`, `!=`, `<=`, `>=`) |
 | **REQ-17** | Delimiters / Punctuation: `(`, `)`, `{`, `}`, `[`, `]`, `;`, `,`, `.` | Mandatory | p. 3 | `DELIMITERS` lookup table in `tokens.py` matching `LPAR`, `RPAR`, `LCUR`, `RCUR`, `LSQU`, `RSQU`, `SEMICOLON`, `COMMA`, `DOT` | Tests for all 9 delimiters individually and in sequence |
 | **REQ-18** | Lexical error detection: invalid symbols, invalid identifiers, unclosed strings, unclosed comments | Mandatory | p. 3, 4 | Dedicated error codes `LEX_INVALID_CHARACTER`, `LEX_INVALID_IDENTIFIER`, `LEX_UNCLOSED_STRING`, `LEX_UNCLOSED_COMMENT` | Direct tests asserting exact message format and positions for each error |
-| **REQ-19** | Error format: Line number, Column number, Descriptive error message | Mandatory | p. 3, 4 | `Diagnostic` class with `format()` producing `Error: <msg> at line L, column C.` or `Error: <msg> starting at line L, column C.` | Verbatim string assertion against PDF p. 3–4 examples |
+| **REQ-19** | Error format: Line number, Column number, Descriptive error message | Mandatory | p. 3, 4 | `Diagnostic` class with `format()` producing `Error: <msg> at line L, column C.` or `Error: <msg> starting at line L, column C.` | Verbatim string assertion against PDF p. 3-4 examples |
 | **REQ-20** | Output format matching `Lexeme: <lexeme>, Token: <TOKEN>` | Mandatory | p. 4, 5 | `Token.format()` and CLI `--phase lex` printing token list in PDF format | Golden test comparing CLI output on PDF sample program |
-| **REQ-21** | Phase 1 submission deliverables: Source code, input text file, brief 1–2 page report | Mandatory | p. 5 | Repository structure: `minijava/`, `samples/phase1_tests.txt`, `docs/phase1_report.md` | Deliverables presence and completeness audit |
+| **REQ-21** | Phase 1 submission deliverables: Source code, input text file, brief 1-2 page report | Mandatory | p. 5 | Repository structure: `minijava/`, `samples/phase1_tests.txt`, `docs/phase1_report.md` | Deliverables presence and completeness audit |
 | **REQ-22** | Phase 2 Syntax Analyzer (Parser) hand-written implementation | Mandatory | p. 1 | `minijava/parser.py` implementing recursive-descent parsing for classes, methods, statements, expressions | `test_parser.py` parsing comprehensive language constructs |
 | **REQ-23** | Phase 3 Semantic Analyzer implementation | Mandatory | p. 1 | `minijava/semantic.py` implementing symbol scoping, type checking, return/call validation | `test_semantic.py` verifying valid and invalid semantic scenarios |
 
@@ -168,7 +168,7 @@ CSCI415 Deliverables
 ├── Phase 01 (Oct 30, 2026)
 │   ├── Source Code: Lexer, Symbol Table, Shared Modules, CLI Driver, Tests
 │   ├── Test Programs: samples/phase1_tests.txt (valid and invalid Mini Java programs)
-│   └── Report: docs/phase1_report.md (1–2 pages: tokens, error handling, challenges)
+│   └── Report: docs/phase1_report.md (1-2 pages: tokens, error handling, challenges)
 ├── Phase 02 & Phase 03 (Dec 20, 2026)
 │   ├── Source Code: Parser, AST nodes, AST Printer, Semantic Analyzer, Scoped Symbol Table
 │   ├── Test Programs: samples/phase23_tests.txt (syntax and semantic test programs)
@@ -211,7 +211,7 @@ Where the 5-page PDF is concise or silent on specific technical details, the tea
 
 | Item | Topic / Issue | PDF Source | Impact / Risk | Provisional Technical Decision | Requires Instructor Clarification? |
 |---|---|---|---|---|---|
-| **P-01** | Operator Token Grouping | p. 3 mentions *"Arithmetic and comparison operators"* without listing token names; p. 4–5 sample shows `+` as `MATHOP`, `>=` as `LOGOP`, `=` as `ASSIGN` | Lexer assistant might invent fine-grained tokens (e.g. `PLUS`, `MINUS`, `GE`) breaking sample output compatibility | Group operators into three broad token types: `MATHOP` (`+`, `-`, `*`, `/`, `%`), `LOGOP` (`==`, `!=`, `<`, `>`, `<=`, `>=`, `&&`, `||`, `!`), and `ASSIGN` (`=`). | Recommended for confirmation, but strictly compliant with PDF sample output. |
+| **P-01** | Operator Token Grouping | p. 3 mentions *"Arithmetic and comparison operators"* without listing token names; p. 4-5 sample shows `+` as `MATHOP`, `>=` as `LOGOP`, `=` as `ASSIGN` | Lexer assistant might invent fine-grained tokens (e.g. `PLUS`, `MINUS`, `GE`) breaking sample output compatibility | Group operators into three broad token types: `MATHOP` (`+`, `-`, `*`, `/`, `%`), `LOGOP` (`==`, `!=`, `<`, `>`, `<=`, `>=`, `&&`, `||`, `!`), and `ASSIGN` (`=`). | Recommended for confirmation, but strictly compliant with PDF sample output. |
 | **P-02** | Keyword status of `main` | p. 2 keyword list omits `main`; p. 4 sample output lists `Lexeme: main, Token: MAIN` | Scanner might classify `main` as `IDENTIFIER` instead of `MAIN` | Treat `main` as a reserved keyword with token type `MAIN`. | Unambiguously resolved by PDF p. 4 sample output. |
 | **P-03** | Token name for keyword `boolean` | p. 2 lists `boolean` in keywords, but `BOOLEAN` is designated for literal `true`/`false` | Token name collision between type keyword and boolean literal | Assign token `BOOLEAN_TYPE` to keyword `boolean`, matching the pattern established by `String` -> `STRING_TYPE`. | Safest non-conflicting mapping. |
 | **P-04** | Concrete Syntax Grammar | PDF outlines Mini Java constructs in samples and descriptions but does not provide an EBNF grammar | Parser assistant might choose an incompatible grammar dialect | Formulate an authoritative EBNF grammar (contract §6.3) supporting classes, fields, methods, if/else, while, for, blocks, return, expressions, and 1D arrays. | Team contract frozen; grammar covers all PDF features. |
@@ -227,4 +227,4 @@ Every requirement in the matrix is linked to a concrete verification mechanism:
 1. **Contract Conformance Suite (`tests/test_contract.py`):** Uses reflection (`inspect`) to assert that all module interfaces, function signatures, dataclass fields, and enum values match the contract exactly.
 2. **Unit Test Suites (`tests/test_*.py`):** Focused tests for each component targeting nominal cases, edge cases, and invalid inputs.
 3. **Golden Test Suites (`tests/golden/`):** Pairings of Mini Java source files (`.mj`) and expected stdout (`.out`), authored independently of the component owners to prevent confirmation bias.
-4. **PDF Acceptance Suite (`tests/test_pdf_examples.py`):** Exact replicas of the code snippets from PDF pages 3–5 tested against the compiler.
+4. **PDF Acceptance Suite (`tests/test_pdf_examples.py`):** Exact replicas of the code snippets from PDF pages 3-5 tested against the compiler.

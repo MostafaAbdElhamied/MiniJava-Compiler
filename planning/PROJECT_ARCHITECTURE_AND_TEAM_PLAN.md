@@ -1,6 +1,6 @@
 # Mini Java Compiler: Architecture Design and Team Task Allocation Plan
 
-**Course:** CSCI415 – Compiler Design (Fall 2026)  
+**Course:** CSCI415 - Compiler Design (Fall 2026)  
 **Authoritative Specification:** `/home/yousefmahmoudali/Desktop/CompilerProject/Projects/ProjectGuidelinesAndDetails.pdf`  
 **Shared Contract:** `/home/yousefmahmoudali/Desktop/CompilerProject/planning/SHARED_PROJECT_CONTRACT.md`  
 **Team Composition:** 5 Computer Science Students (Member 1 to Member 5)  
@@ -98,7 +98,7 @@ Every file in the repository has exactly **one designated owner**. No member may
 │   ├── test_symbol_table.py              [M3] Symbol table unit test suite (≥ 25 tests)
 │   ├── test_mj_types.py                  [M3] Type algebra and operation validity test suite (≥ 20 tests)
 │   ├── test_parser.py                    [M4] Parser grammar, precedence, and error tests (≥ 40 tests)
-│   ├── test_pdf_examples.py              [M4] Exact PDF p. 3–5 code snippet regression suite
+│   ├── test_pdf_examples.py              [M4] Exact PDF p. 3-5 code snippet regression suite
 │   ├── test_semantic.py                  [M5] Semantic analysis and scope error test suite (≥ 45 tests)
 │   └── golden/
 │       ├── lex/                          [M5] Independent oracle: *.mj + *.out for lexer (≥ 12 cases)
@@ -108,7 +108,7 @@ Every file in the repository has exactly **one designated owner**. No member may
 │   ├── phase1_tests.txt                  [M3] Official Phase 1 input test programs deliverable
 │   └── phase23_tests.txt                 [M3] Official Phase 2 & 3 input test programs deliverable
 └── docs/
-    ├── phase1_report.md                  [M3] Official Phase 1 1–2 page technical report
+    ├── phase1_report.md                  [M3] Official Phase 1 1-2 page technical report
     └── phase23_report.md                 [M3] Official Phase 2 & 3 technical report
 ```
 
@@ -136,7 +136,7 @@ Work is distributed across five balanced, cohesive roles. Workload percentages s
 |---|---|---|---|---|---|---|---|
 | **Member 1** | Lead Architect & Integration Lead | Shared data models, driver, test runner, integration gatekeeper | `minijava/tokens.py`<br>`minijava/diagnostics.py`<br>`minijava/ast_nodes.py`<br>`minijava/driver.py`<br>`minijava/__main__.py`<br>`tests/helpers.py`<br>`tests/test_contract.py`<br>`tests/test_golden.py`<br>`README.md` | `minijava/tokens.py`<br>`minijava/diagnostics.py`<br>`minijava/ast_nodes.py`<br>`minijava/driver.py`<br>`minijava/__init__.py`<br>`minijava/__main__.py`<br>`tests/__init__.py`<br>`tests/helpers.py`<br>`tests/test_contract.py`<br>`tests/test_driver.py`<br>`tests/test_golden.py`<br>`README.md`<br>`.gitignore`<br>`planning/*` | None (provides foundational contracts) | Byte-compiles cleanly; `test_contract.py` validates all member PRs; driver formats reports matching §7.2; CLI exit codes correct | **22%** |
 | **Member 2** | Lexer Engineer & AST Visualizer | Hand-crafted scanner (Phase 1) and canonical AST printer (Phase 2) | `minijava/lexer.py`<br>`minijava/ast_printer.py`<br>`tests/test_lexer.py`<br>`tests/test_ast_printer.py`<br>`tests/golden/parse/*.mj` + `*.out` | `minijava/lexer.py`<br>`minijava/ast_printer.py`<br>`tests/test_lexer.py`<br>`tests/test_ast_printer.py`<br>`tests/golden/parse/*` | `tokens.py`<br>`diagnostics.py`<br>`symbol_table.py`<br>`ast_nodes.py` | Lexer handles all tokens, escapes, comments, invalid ids, unclosed comments/strings; matches PDF sample output; ≥ 40 lexer tests; AST printer handles all AST nodes | **20%** |
-| **Member 3** | Symbol Table & Types Engineer | Symbol tables (Phases 1 & 3), type algebra, official submission docs | `minijava/symbol_table.py`<br>`minijava/mj_types.py`<br>`tests/test_symbol_table.py`<br>`tests/test_mj_types.py`<br>`samples/phase1_tests.txt`<br>`samples/phase23_tests.txt`<br>`docs/phase1_report.md`<br>`docs/phase23_report.md` | `minijava/symbol_table.py`<br>`minijava/mj_types.py`<br>`tests/test_symbol_table.py`<br>`tests/test_mj_types.py`<br>`samples/*`<br>`docs/*` | `tokens.py`<br>`diagnostics.py`<br>`ast_nodes.py` | `IdentifierTable` and `ScopedSymbolTable` implement all methods; `mj_types.py` models all type rules and promotions; test files contain comprehensive test cases; 1–2 page reports completed | **19%** |
+| **Member 3** | Symbol Table & Types Engineer | Symbol tables (Phases 1 & 3), type algebra, official submission docs | `minijava/symbol_table.py`<br>`minijava/mj_types.py`<br>`tests/test_symbol_table.py`<br>`tests/test_mj_types.py`<br>`samples/phase1_tests.txt`<br>`samples/phase23_tests.txt`<br>`docs/phase1_report.md`<br>`docs/phase23_report.md` | `minijava/symbol_table.py`<br>`minijava/mj_types.py`<br>`tests/test_symbol_table.py`<br>`tests/test_mj_types.py`<br>`samples/*`<br>`docs/*` | `tokens.py`<br>`diagnostics.py`<br>`ast_nodes.py` | `IdentifierTable` and `ScopedSymbolTable` implement all methods; `mj_types.py` models all type rules and promotions; test files contain comprehensive test cases; 1-2 page reports completed | **19%** |
 | **Member 4** | Syntax Analyzer (Parser) Engineer | Hand-crafted recursive-descent parser (Phase 2) | `minijava/parser.py`<br>`tests/test_parser.py`<br>`tests/test_pdf_examples.py` | `minijava/parser.py`<br>`tests/test_parser.py`<br>`tests/test_pdf_examples.py` | `tokens.py`<br>`diagnostics.py`<br>`ast_nodes.py` | Hand-crafted recursive descent; operator precedence and left-associativity; correct AST construction; single syntax error reporting with exact format; ≥ 40 parser tests; PDF examples pass | **20%** |
 | **Member 5** | Semantic Analyzer & Test Oracle Lead | Static semantic analyzer (Phase 3) and independent test oracles | `minijava/semantic.py`<br>`tests/test_semantic.py`<br>`tests/golden/lex/*`<br>`tests/golden/semantic/*` | `minijava/semantic.py`<br>`tests/test_semantic.py`<br>`tests/golden/lex/*`<br>`tests/golden/semantic/*` | `ast_nodes.py`<br>`diagnostics.py`<br>`symbol_table.py`<br>`mj_types.py` | Multi-pass analysis; class, method, and block scoping; type compatibility; assignment, binary, unary, call, and return checking; ≥ 45 semantic tests; independent lex & semantic golden cases | **19%** |
 
@@ -208,10 +208,10 @@ flowchart TD
 |---|---|---|---|---|
 | **MS-1: Architecture & Contract Approval** | Day 1 | `SHARED_PROJECT_CONTRACT.md`, directory structure, git branch setup | All 5 members approve contract; git repository initialized with `main` and `integration` | All Members (M1 leads) |
 | **MS-2: Shared Core Data Models** | Day 2 | `tokens.py`, `diagnostics.py`, `ast_nodes.py`, `tests/test_contract.py` | Byte-compiles; contract suite tests pass; files frozen under contract change control | Member 1 |
-| **MS-3: Phase 1 Foundations** | Days 3–4 | `symbol_table.py` (`IdentifierTable`), `tests/helpers.py`, lexer stub | `IdentifierTable` passes unit tests; test helpers ready for mock token streams | Member 3, Member 1 |
-| **MS-4: Phase 1 Implementation & Lexer Validation** | Days 5–7 | `lexer.py`, `test_lexer.py`, `samples/phase1_tests.txt`, `docs/phase1_report.md` | Lexer passes ≥ 40 unit tests; reproduces PDF p. 4–5 sample output exactly; reports all 4 error types; Phase 1 report drafted | Member 2, Member 3, Member 5 |
+| **MS-3: Phase 1 Foundations** | Days 3-4 | `symbol_table.py` (`IdentifierTable`), `tests/helpers.py`, lexer stub | `IdentifierTable` passes unit tests; test helpers ready for mock token streams | Member 3, Member 1 |
+| **MS-4: Phase 1 Implementation & Lexer Validation** | Days 5-7 | `lexer.py`, `test_lexer.py`, `samples/phase1_tests.txt`, `docs/phase1_report.md` | Lexer passes ≥ 40 unit tests; reproduces PDF p. 4-5 sample output exactly; reports all 4 error types; Phase 1 report drafted | Member 2, Member 3, Member 5 |
 | **MS-5: Phase 1 Integration Checkpoint** | Day 8 | Phase 1 CLI integration (`python3 -m minijava <file> --phase lex`) | `test_driver.py` passes; golden lexer tests pass; Phase 1 submission package verified | Member 1 (Lead), Member 2, Member 3 |
-| **MS-6: Phase 2 Parser & AST Generation** | Days 9–14 | `parser.py`, `ast_printer.py`, `test_parser.py`, `test_ast_printer.py` | Parser handles all grammar rules, precedence, associativity; reports syntax errors; AST printer formats AST; ≥ 40 parser tests pass | Member 4, Member 2 |
-| **MS-7: Phase 3 Type System & Scoped Symbol Table** | Days 15–18 | `mj_types.py`, `ScopedSymbolTable`, `test_symbol_table.py`, `test_mj_types.py` | Scope enter/reenter/exit passes; all type promotion and assignability rules tested; ≥ 40 tests pass | Member 3 |
-| **MS-8: Phase 3 Semantic Analysis Implementation** | Days 19–24 | `semantic.py`, `test_semantic.py`, `samples/phase23_tests.txt`, `docs/phase23_report.md` | Multi-pass analysis; all SEM error codes reported; passes ≥ 45 semantic tests; golden semantic tests pass | Member 5, Member 3 |
-| **MS-9: Full System Integration & Submission Audit** | Days 25–28 | Full end-to-end pipeline, final reports, presentation walkthrough rehearsal | `python3 -m unittest discover` runs 100% clean; PDF examples verified; all 5 members pass code walkthrough | All Members (M1 leads) |
+| **MS-6: Phase 2 Parser & AST Generation** | Days 9-14 | `parser.py`, `ast_printer.py`, `test_parser.py`, `test_ast_printer.py` | Parser handles all grammar rules, precedence, associativity; reports syntax errors; AST printer formats AST; ≥ 40 parser tests pass | Member 4, Member 2 |
+| **MS-7: Phase 3 Type System & Scoped Symbol Table** | Days 15-18 | `mj_types.py`, `ScopedSymbolTable`, `test_symbol_table.py`, `test_mj_types.py` | Scope enter/reenter/exit passes; all type promotion and assignability rules tested; ≥ 40 tests pass | Member 3 |
+| **MS-8: Phase 3 Semantic Analysis Implementation** | Days 19-24 | `semantic.py`, `test_semantic.py`, `samples/phase23_tests.txt`, `docs/phase23_report.md` | Multi-pass analysis; all SEM error codes reported; passes ≥ 45 semantic tests; golden semantic tests pass | Member 5, Member 3 |
+| **MS-9: Full System Integration & Submission Audit** | Days 25-28 | Full end-to-end pipeline, final reports, presentation walkthrough rehearsal | `python3 -m unittest discover` runs 100% clean; PDF examples verified; all 5 members pass code walkthrough | All Members (M1 leads) |

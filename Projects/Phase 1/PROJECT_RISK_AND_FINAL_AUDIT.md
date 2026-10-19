@@ -1,7 +1,7 @@
 # Mini Java Compiler: Phase 1 Risk Assessment, Consistency Matrix, and Final Audit
 
-**Course:** CSCI415 – Compiler Design (Fall 2026)  
-**Project Title:** Mini Java Compiler — Phase 1: Lexical Analysis  
+**Course:** CSCI415 - Compiler Design (Fall 2026)  
+**Project Title:** Mini Java Compiler - Phase 1: Lexical Analysis  
 **Authoritative Specification:** `/home/yousefmahmoudali/Desktop/CompilerProject/Projects/ProjectGuidelinesAndDetails.pdf`  
 **Shared Contract:** `/home/yousefmahmoudali/Desktop/CompilerProject/Projects/Phase 1/SHARED_PROJECT_CONTRACT.md`  
 **Phase 1 Target Deadline:** **October 30, 2026**  
@@ -12,7 +12,7 @@
 
 | Risk ID | Category | Description | Likelihood | Impact | Prevention Strategy | Detection Method | Owner | Recovery Strategy |
 |---|---|---|---|---|---|---|---|---|
-| **RSK-01** | Grading / Integrity | Plagiarism or use of banned regex (`re`) or compiler generator libraries (*PDF p. 1–2*) | Medium | **Critical** | Explicit ban in shared contract §2; pure sequential character loops | Automated AST check: `grep -rnE "(import re\|import ply\|import lark\|import antlr4\|import tokenize)" minijava/` | Member 1 (Lead) | Immediate code purge and clean-room reimplementation adhering to contract. |
+| **RSK-01** | Grading / Integrity | Plagiarism or use of banned regex (`re`) or compiler generator libraries (*PDF p. 1-2*) | Medium | **Critical** | Explicit ban in shared contract §2; pure sequential character loops | Automated AST check: `grep -rnE "(import re\|import ply\|import lark\|import antlr4\|import tokenize)" minijava/` | Member 1 (Lead) | Immediate code purge and clean-room reimplementation adhering to contract. |
 | **RSK-02** | Coordination | AI assistants inventing incompatible helper function signatures or data structures | High | **High** | Frozen shared contract with verbatim signatures embedded in every prompt | Automated reflection test suite (`tests/test_contract.py`) executed before any merge | Member 1 | Reject PR; require member's AI assistant to align with contract signatures. |
 | **RSK-03** | Technical | Incorrect 1-based line or column tracking across multi-line comments and tabs | Medium | **High** | Explicit contract rules: 1-based indexing, tab counts as 1 column, newline resets col to 1 | PDF regression suite (`tests/test_pdf_examples.py`) asserting exact line/column coordinates | Member 2 | Adjust cursor coordinate calculation logic in `_advance()`. |
 | **RSK-04** | Technical | Maximal munch failure: two-character operators (e.g. `>=`) split into two tokens (`>` and `=`) | Medium | **High** | Two-character operator lookup performed before single-character check in `scan_operator` | Operator unit tests in `tests/test_scanner_str_op.py` | Member 5 | Ensure `TWO_CHAR_OPERATORS` check executes first. |
@@ -85,7 +85,7 @@ main (verified Phase 1 release for Oct 30 submission)
 | **7** | Each task has objective, testable acceptance criteria | **PASS** | Specified in Section H of every individual AI implementation prompt. |
 | **8** | An incremental integration sequence exists | **PASS** | 6 sequential checkpoints defined in `INTEGRATION_AND_TESTING_PLAN.md` §1 & §2. |
 | **9** | Build and execution strategy is compatible with Python ≥ 3.10 stdlib | **PASS** | Zero external dependencies; standard `compileall` and `unittest` commands verified. |
-| **10** | Final testing process verifies compliance with original PDF | **PASS** | `tests/test_pdf_examples.py` tests all PDF p. 3–5 examples; PDF sample output verified verbatim. |
+| **10** | Final testing process verifies compliance with original PDF | **PASS** | `tests/test_pdf_examples.py` tests all PDF p. 3-5 examples; PDF sample output verified verbatim. |
 | **11** | Unresolved assumptions and instructor questions are clearly identified | **PASS** | Documented in `PROJECT_REQUIREMENTS_ANALYSIS.md` §1.4. |
 | **12** | Forward compatibility for Phases 2 & 3 is guaranteed | **PASS** | Tokens end with `EOF`; `Diagnostic` and `symbol_table.py` designed to receive parser and semantics seamlessly. |
 

@@ -1,6 +1,6 @@
 # Mini Java Compiler: Project Risk Assessment, Consistency Matrix, and Final Audit
 
-**Course:** CSCI415 – Compiler Design (Fall 2026)  
+**Course:** CSCI415 - Compiler Design (Fall 2026)  
 **Authoritative Specification:** `/home/yousefmahmoudali/Desktop/CompilerProject/Projects/ProjectGuidelinesAndDetails.pdf`  
 **Shared Contract:** `/home/yousefmahmoudali/Desktop/CompilerProject/planning/SHARED_PROJECT_CONTRACT.md`  
 **Document Status:** Official Risk Register, Consistency Audit, and Quality Assurance Sign-Off  
@@ -13,7 +13,7 @@ The following matrix identifies the primary technical, coordination, integration
 
 | Risk ID | Category | Description | Likelihood | Impact | Prevention Strategy | Detection Method | Owner | Recovery Strategy |
 |---|---|---|---|---|---|---|---|---|
-| **RSK-01** | Grading / Integrity | Plagiarism or use of banned compiler generator libraries (`re`, `ply`, `lark`, `antlr`) leading to zero grade (*PDF p. 1–2*) | Medium | **Critical** | Explicit ban in shared contract §4; hand-written scanning and recursive descent; standard library only | Automated CI check: `grep -rnE "(import re\|import ply\|import lark\|import antlr4\|import ast\|import tokenize)" minijava/` | Member 1 (Lead) | Immediate code purge and clean-room reimplementation adhering to contract algorithms. |
+| **RSK-01** | Grading / Integrity | Plagiarism or use of banned compiler generator libraries (`re`, `ply`, `lark`, `antlr`) leading to zero grade (*PDF p. 1-2*) | Medium | **Critical** | Explicit ban in shared contract §4; hand-written scanning and recursive descent; standard library only | Automated CI check: `grep -rnE "(import re\|import ply\|import lark\|import antlr4\|import ast\|import tokenize)" minijava/` | Member 1 (Lead) | Immediate code purge and clean-room reimplementation adhering to contract algorithms. |
 | **RSK-02** | Coordination | Independent AI assistants introducing divergent function signatures, class names, or return types | High | **High** | Frozen shared contract with verbatim code in all 5 prompts; strict file ownership boundaries | Automated contract conformance suite (`tests/test_contract.py`) run before any merge | Member 1 | Reject PR; require AI assistant to align with frozen contract specifications. |
 | **RSK-03** | Integration | "Big-bang" late integration resulting in incompatible stages and broken data flow | Medium | **High** | Incremental 8-checkpoint integration sequence (Checkpoint 1 through 8 in `INTEGRATION_AND_TESTING_PLAN.md`) | Automated integration pipeline test suite run after every single component merge | Member 1 | Revert to previous passing checkpoint tag; isolate interface mismatch with unit test doubles. |
 | **RSK-04** | Technical | AI assistant writing test doubles or mock code with `pass` / `TODO` stubs that bypass actual compiler logic | Medium | **High** | Explicit prompt instructions banning placeholders; definition of done requiring concrete logic and golden test passage | Automated scan for `TODO`, `pass`, or `NotImplementedError` in merged `minijava/` code | Member 1, All Members | Flag stubbed method in review; require concrete implementation before PR acceptance. |

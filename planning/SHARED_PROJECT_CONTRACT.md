@@ -1,4 +1,4 @@
-# SHARED PROJECT CONTRACT — Mini Java Compiler (CSCI415, Fall 2026)
+# SHARED PROJECT CONTRACT - Mini Java Compiler (CSCI415, Fall 2026)
 
 **Contract version:** 1.0.0 (status: PROPOSED → becomes FROZEN once all five members approve, see §15)
 **Official specification:** `/home/yousefmahmoudali/Desktop/CompilerProject/Projects/ProjectGuidelinesAndDetails.pdf` (5 pages)
@@ -48,14 +48,14 @@ No code generation, IR, optimization or execution is required by the PDF and **n
 | R-16 | Arithmetic and comparison operators (no list given) | p3 |
 | R-17 | Delimiters `LPAR ( RPAR ) LCUR { RCUR } LSQU [ RSQU ] SEMICOLON ; COMMA , DOT .` | p3 |
 | R-18 | Lexical errors: invalid symbols, invalid identifiers, unclosed strings, unterminated multi-line comments; each with line, column, descriptive message | p3 |
-| R-19 | Error message examples (exact wording reproduced in §10) | p3–p4 |
-| R-20 | Sample output format `Lexeme: <lexeme>, Token: <TOKEN>` ("similar, not exact") | p4–p5 |
-| R-21 | Phase 1 deliverables: source code, input text file of Mini Java test programs, 1–2 page report (tokens, error handling, challenges) | p5 |
+| R-19 | Error message examples (exact wording reproduced in §10) | p3-p4 |
+| R-20 | Sample output format `Lexeme: <lexeme>, Token: <TOKEN>` ("similar, not exact") | p4-p5 |
+| R-21 | Phase 1 deliverables: source code, input text file of Mini Java test programs, 1-2 page report (tokens, error handling, challenges) | p5 |
 
 ### 1.3 Provisional decisions where the PDF is silent (binding for implementation; to be confirmed with instructor)
 | ID | Decision | Reason |
 |---|---|---|
-| P-01 | Operators: `MATHOP` = `+ - * / %`; `LOGOP` = `== != < > <= >= && \|\| !`; `ASSIGN` = `=` | p3 lists no operators; p4–p5 sample shows `+`→MATHOP, `>=`→LOGOP, `=`→ASSIGN |
+| P-01 | Operators: `MATHOP` = `+ - * / %`; `LOGOP` = `== != < > <= >= && \|\| !`; `ASSIGN` = `=` | p3 lists no operators; p4-p5 sample shows `+`→MATHOP, `>=`→LOGOP, `=`→ASSIGN |
 | P-02 | `main` is a reserved word with token `MAIN` | p4 sample shows `Lexeme: main, Token: MAIN` although p2 keyword list omits it |
 | P-03 | Keyword `boolean` → token `BOOLEAN_TYPE` | `BOOLEAN` is already the literal token (p2); mirrors `String`→`STRING_TYPE` |
 | P-04 | Other keywords use the upper-case keyword as token name (`CLASS`, `INT`, `CHAR`, …) | consistent with p4 sample |
@@ -85,9 +85,9 @@ source file ──► driver.read_source() ──► str
 
 | Component | Module | Owner | Input | Output |
 |---|---|---|---|---|
-| Shared tokens | `minijava/tokens.py` | M1 | — | `TokenType`, `Token`, keyword/operator tables |
-| Shared diagnostics | `minijava/diagnostics.py` | M1 | — | `Phase`, `ErrorCode`, `Diagnostic`, `make_diagnostic` |
-| Shared AST | `minijava/ast_nodes.py` | M1 (M4 reviews) | — | AST dataclasses |
+| Shared tokens | `minijava/tokens.py` | M1 | - | `TokenType`, `Token`, keyword/operator tables |
+| Shared diagnostics | `minijava/diagnostics.py` | M1 | - | `Phase`, `ErrorCode`, `Diagnostic`, `make_diagnostic` |
+| Shared AST | `minijava/ast_nodes.py` | M1 (M4 reviews) | - | AST dataclasses |
 | Lexer (Phase 1) | `minijava/lexer.py` | M2 | `str` | `LexResult` |
 | Symbol tables | `minijava/symbol_table.py` | M3 | calls from lexer/semantic | `IdentifierTable`, `ScopedSymbolTable` |
 | Type system | `minijava/mj_types.py` | M3 | types/operators | `MJType`, type rules |
@@ -137,7 +137,7 @@ CompilerProject/
 │   ├── test_ast_printer.py              M2
 │   ├── test_symbol_table.py             M3
 │   ├── test_mj_types.py                 M3
-│   ├── test_pdf_examples.py             M4  PDF p3–p5 examples as acceptance tests
+│   ├── test_pdf_examples.py             M4  PDF p3-p5 examples as acceptance tests
 │   ├── test_parser.py                   M4
 │   ├── test_semantic.py                 M5
 │   └── golden/
@@ -216,7 +216,7 @@ Token type names and lexeme rules:
 | `LOGOP` | `== != < > <= >= && \|\| !` |
 | `ASSIGN` | `=` |
 | `LPAR RPAR LCUR RCUR LSQU RSQU SEMICOLON COMMA DOT` | `( ) { } [ ] ; , .` |
-| `EOF` | `""` — exactly one, always last |
+| `EOF` | `""` - exactly one, always last |
 
 ### 6.2 Lexer (`minijava/lexer.py`, owner M2)
 
@@ -236,7 +236,7 @@ def tokenize(source: str) -> LexResult:   # convenience: return Lexer(source).to
 
 Lexer rules (all binding):
 1. Scan character by character with an index; no regex (R-05, R-07).
-2. Whitespace = space, `\t`, `\n`, `\r`, `\f`, `\v` — skipped.
+2. Whitespace = space, `\t`, `\n`, `\r`, `\f`, `\v` - skipped.
 3. `//` skips to (not including) the next `\n` or EOF. `/*` skips to the first `*/` (no nesting). If EOF is reached first: `LEX_UNCLOSED_COMMENT` at the position of `/`; scanning ends.
 4. Identifier/keyword: start `[A-Za-z_]`, continue `[A-Za-z0-9_]`; look up `KEYWORDS` (case-sensitive) else `IDENTIFIER`. Every `IDENTIFIER` token is recorded with `identifier_table.add_occurrence(name, line, column)`.
 5. Number: `[0-9]+`; if next is `.` **and** the char after it is a digit, consume `.` and `[0-9]+`. Then, if the next char is `[A-Za-z_]`, consume all following `[A-Za-z0-9_]` and report `LEX_INVALID_IDENTIFIER` with the whole lexeme (e.g. `1name`, `3abc`, `2.5x`) at the start position; no token is produced. `25.` → `NUMBER 25`, `DOT`. `.5` → `DOT`, `NUMBER 5`. A leading `-` is always a separate `MATHOP`.
@@ -247,7 +247,7 @@ Lexer rules (all binding):
 10. Lexing never stops at the first error (except an unclosed comment, which consumes to EOF). Erroneous lexemes produce **no token**.
 11. `EOF` token position: the line/column just after the last character (for empty input: line 1, column 1).
 
-### 6.3 Grammar (binding, P-06) — terminals are `TokenType` names; `LOGOP("&&")` means LOGOP with that lexeme
+### 6.3 Grammar (binding, P-06) - terminals are `TokenType` names; `LOGOP("&&")` means LOGOP with that lexeme
 
 ```
 program        ::= classDecl { classDecl } EOF
@@ -346,9 +346,9 @@ def analyze(program: Program) -> SemanticResult:   # convenience
 ```
 
 **Passes (deterministic order):**
-1. Pass 1a — for each `ClassDecl` in order: define a `CLASS` symbol in the global scope (duplicate → `SEM_DUPLICATE_DECLARATION`). Create its class scope (`enter_scope(name, ScopeKind.CLASS)`), store it in `symbol.scope`, exit.
-2. Pass 1b — for each class in order, re-enter its class scope; for each member in order define `FIELD` or `METHOD` symbol (duplicates in one class scope → `SEM_DUPLICATE_DECLARATION`; fields and methods share one namespace). Method symbols get `param_types`.
-3. Pass 2 — for each class in order, re-enter its scope; for each member in order: check field initializer; or for a method: `enter_scope(method_name, ScopeKind.METHOD)`, define `PARAMETER`s, analyze body **statements directly in the method scope** (the body `Block` does not open another scope), exit.
+1. Pass 1a - for each `ClassDecl` in order: define a `CLASS` symbol in the global scope (duplicate → `SEM_DUPLICATE_DECLARATION`). Create its class scope (`enter_scope(name, ScopeKind.CLASS)`), store it in `symbol.scope`, exit.
+2. Pass 1b - for each class in order, re-enter its class scope; for each member in order define `FIELD` or `METHOD` symbol (duplicates in one class scope → `SEM_DUPLICATE_DECLARATION`; fields and methods share one namespace). Method symbols get `param_types`.
+3. Pass 2 - for each class in order, re-enter its scope; for each member in order: check field initializer; or for a method: `enter_scope(method_name, ScopeKind.METHOD)`, define `PARAMETER`s, analyze body **statements directly in the method scope** (the body `Block` does not open another scope), exit.
 - Duplicate classes/methods are still analyzed (in their own new scopes) so errors inside them are reported.
 
 **Scopes:** nested `Block` statement → `enter_scope(f"block@{line}:{column}", ScopeKind.BLOCK)`; `For` → `enter_scope(f"for@{line}:{column}", ScopeKind.BLOCK)` containing its init var, and its body if it is a `Block` statement is analyzed inside a further `block@…` scope like any block.
@@ -479,13 +479,13 @@ Format: one node per line, two spaces of indentation per depth, children at dept
 | Assign | `Assign` | target, value |
 | If | `If` | label `Condition:` → condition; `Then:` → then_branch; `Else:` → else_branch (only if present) |
 | While | `While` | `Condition:`, `Body:` |
-| For | `For` | `Init:`, `Condition:`, `Update:`, `Body:` — an absent slot prints `<Label>: <none>` with no child |
+| For | `For` | `Init:`, `Condition:`, `Update:`, `Body:` - an absent slot prints `<Label>: <none>` with no child |
 | Return | `Return` | value if present |
 | ExprStmt | `ExprStmt` | expression |
 | Binary | `Binary <op>` | left, right |
 | Unary | `Unary <op>` | operand |
-| Literal | `Literal <kind> <lexeme>` | — |
-| Identifier | `Identifier <name>` | — |
+| Literal | `Literal <kind> <lexeme>` | - |
+| Identifier | `Identifier <name>` | - |
 | IndexExpr | `Index` | array, index |
 | FieldAccess | `FieldAccess <name>` | target |
 | CallExpr | `Call` | callee, then label `Arguments:` with args (label printed even if no args) |
@@ -523,7 +523,7 @@ python3 -m minijava <source-file> [--phase {lex,parse,semantic}] [--tokens] [--s
 `--phase` maps `lex`→`Phase.LEXICAL`, `parse`→`Phase.SYNTAX`, `semantic`→`Phase.SEMANTIC` (default).
 File read errors: stderr `error: cannot read file '<path>': <reason>`, exit 2. The source path is **never** printed on stdout.
 
-### 7.2 Report layout (exact) — sections in this order; each header is its own line
+### 7.2 Report layout (exact) - sections in this order; each header is its own line
 `format_report` returns the printed sections joined by **one blank line** (`"\n\n"`); each section is its header
 line followed by its body lines (`"\n"`-joined). The returned string has **no** trailing newline; `main` prints it
 with `print()` (so stdout ends with exactly one `\n`).
@@ -551,9 +551,9 @@ Pre-order; scope header `Scope <name> (<KIND>)`; each symbol at +2 spaces: `<KIN
 (method type via `format_method_type`, e.g. `METHOD add : int(int, int) at line 3, column 16`); child scopes at +2.
 
 ### 7.6 Example (Phase 1, PDF p4 sample)
-`python3 -m minijava sample.mj --phase lex` prints the 41 `Lexeme: …, Token: …` lines exactly as on PDF p4–p5,
+`python3 -m minijava sample.mj --phase lex` prints the 41 `Lexeme: …, Token: …` lines exactly as on PDF p4-p5,
 then the symbol table (`Student`, `age`, `grade`, `name`), `=== Errors ===`, `(none)`, `=== Result ===`,
-`Lexical analysis completed successfully with no errors.` — exit code 0.
+`Lexical analysis completed successfully with no errors.` - exit code 0.
 
 ---
 
@@ -561,14 +561,14 @@ then the symbol table (`Student`, `age`, `grade`, `name`), `=== Errors ===`, `(n
 
 | Module | May import (project) | Extra stdlib allowed |
 |---|---|---|
-| `tokens` | — | `dataclasses`, `enum` |
-| `diagnostics` | — | `dataclasses`, `enum` |
-| `ast_nodes` | — | `dataclasses`, `typing` |
+| `tokens` | - | `dataclasses`, `enum` |
+| `diagnostics` | - | `dataclasses`, `enum` |
+| `ast_nodes` | - | `dataclasses`, `typing` |
 | `mj_types` | `ast_nodes` | `dataclasses` |
 | `symbol_table` | `mj_types` | `dataclasses`, `enum` |
 | `lexer` | `tokens`, `diagnostics`, `symbol_table` | `dataclasses` |
 | `parser` | `tokens`, `diagnostics`, `ast_nodes` | `dataclasses` |
-| `ast_printer` | `ast_nodes` | — |
+| `ast_printer` | `ast_nodes` | - |
 | `semantic` | `ast_nodes`, `diagnostics`, `mj_types`, `symbol_table` | `dataclasses` |
 | `driver` | all of the above | `argparse`, `sys`, `dataclasses` |
 | `__main__` | `driver` | `sys` |
@@ -585,7 +585,7 @@ See §4. Additionally: test classes `Test<Thing>`, test methods `test_<behavior>
 
 ## 10. Error-handling and diagnostic conventions
 - One shared `Diagnostic` type (Appendix B). Message text comes **only** from `MESSAGE_TEMPLATES`; components pass arguments, never free text.
-- Lexical messages reproduce the PDF p3–p4 wording exactly, e.g.:
+- Lexical messages reproduce the PDF p3-p4 wording exactly, e.g.:
   `Error: invalid character '@' at line 1, column 12.` · `Error: invalid identifier '1name' at line 1, column 1.` ·
   `Error: unclosed string literal starting at line 1, column 15.` · `Error: unclosed comment starting at line 1, column 1.`
 - Create diagnostics only via `make_diagnostic(code, line, column, **args)`; all arg values are `str`.
@@ -611,7 +611,7 @@ See §5. No build step beyond byte-compilation. No virtual environment needed (n
 - Each golden `.mj` begins with a comment stating the case's purpose.
 - `.out` files are **hand-derived from this contract and the PDF**, never produced by running the code under test
   and copying its output. The author of a golden case must not be the owner of the component it primarily tests.
-- `test_golden.py` and `test_contract.py` **skip** (via `unittest.SkipTest`) — not fail — cases whose required module
+- `test_golden.py` and `test_contract.py` **skip** (via `unittest.SkipTest`) - not fail - cases whose required module
   (`minijava.parser` for parse, `minijava.semantic` for semantic) cannot be imported. Once the module is merged, the
   skip disappears automatically.
 
@@ -631,13 +631,13 @@ Until M1 delivers `helpers.py`, members may use local private helpers inside the
 ### 12.4 Minimum coverage per component
 | Component | Minimum |
 |---|---|
-| lexer | every TokenType; every error code; all 4 PDF error examples; PDF sample; positions; comments; escapes; edge cases (§6.2) — ≥ 40 test methods |
-| symbol_table / mj_types | every public method; every operator × type class in §6.6 — ≥ 40 test methods total |
-| parser | every grammar production; precedence/associativity; dangling else; every SYN code — ≥ 40 test methods |
-| ast_printer | every node type and label rule — ≥ 20 test methods; ≥ 10 parse golden cases |
-| semantic | every SEM code at least twice; scope rules; built-ins — ≥ 45 test methods; ≥ 15 semantic golden cases |
-| driver | every section/result line, exit codes, file errors — ≥ 15 test methods |
-| golden lex | ≥ 12 cases including PDF p3–p5 examples |
+| lexer | every TokenType; every error code; all 4 PDF error examples; PDF sample; positions; comments; escapes; edge cases (§6.2) - ≥ 40 test methods |
+| symbol_table / mj_types | every public method; every operator × type class in §6.6 - ≥ 40 test methods total |
+| parser | every grammar production; precedence/associativity; dangling else; every SYN code - ≥ 40 test methods |
+| ast_printer | every node type and label rule - ≥ 20 test methods; ≥ 10 parse golden cases |
+| semantic | every SEM code at least twice; scope rules; built-ins - ≥ 45 test methods; ≥ 15 semantic golden cases |
+| driver | every section/result line, exit codes, file errors - ≥ 15 test methods |
+| golden lex | ≥ 12 cases including PDF p3-p5 examples |
 
 ---
 
@@ -679,13 +679,13 @@ src = "class A { int f(int a) { return a + 1; } }"
 lr = tokenize(src); pr = parse(lr.tokens)
 print(format_ast(pr.program))
 # Program
-#   ClassDecl A
-#     MethodDecl int f(int a)
-#       Block
-#         Return
-#           Binary +
-#             Identifier a
-#             Literal NUMBER 1
+#  ClassDecl A
+#    MethodDecl int f(int a)
+#      Block
+#        Return
+#          Binary +
+#            Identifier a
+#            Literal NUMBER 1
 
 sr = analyze(pr.program)
 sr.diagnostics   # []
@@ -693,7 +693,7 @@ sr.diagnostics   # []
 pr2 = parse(tokenize("class A { void m() { int x = true; y = 1; } }").tokens)
 [d.format() for d in analyze(pr2.program).diagnostics]
 # ["Error: semantic error at line 1, column 26: type mismatch: cannot assign a value of type 'boolean' to a target of type 'int'.",
-#  "Error: semantic error at line 1, column 36: 'y' is not declared."]
+# "Error: semantic error at line 1, column 36: 'y' is not declared."]
 
 pr3 = parse(tokenize("class A { void m() { int x = 1 } }").tokens)
 pr3.program, [d.format() for d in pr3.diagnostics]
@@ -702,7 +702,7 @@ pr3.program, [d.format() for d in pr3.diagnostics]
 
 ---
 
-## Appendix A — `minijava/tokens.py` (verbatim)
+## Appendix A - `minijava/tokens.py` (verbatim)
 
 ```python
 """Shared token definitions for the Mini Java compiler (contract v1.0.0).
@@ -823,7 +823,7 @@ class Token:
         return f"'{self.lexeme}'"
 ```
 
-## Appendix B — `minijava/diagnostics.py` (verbatim)
+## Appendix B - `minijava/diagnostics.py` (verbatim)
 
 ```python
 """Shared diagnostic (error) definitions for the Mini Java compiler (contract v1.0.0).
@@ -993,7 +993,7 @@ def make_diagnostic(code: ErrorCode, line: int, column: int, **args: str) -> Dia
     return Diagnostic(code=code, line=line, column=column, args=dict(args))
 ```
 
-## Appendix C — `minijava/ast_nodes.py` (verbatim)
+## Appendix C - `minijava/ast_nodes.py` (verbatim)
 
 ```python
 """Shared abstract syntax tree node definitions for Mini Java (contract v1.0.0).

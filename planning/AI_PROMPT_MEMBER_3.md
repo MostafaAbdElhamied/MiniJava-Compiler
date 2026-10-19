@@ -19,7 +19,7 @@ You are **Member 3**, the **Symbol Table and Type System Engineer, Deliverables 
 3. **Official Course Deliverables & Reports:**
    - Author `samples/phase1_tests.txt` (official Phase 1 test suite input file required by *PDF p. 5*).
    - Author `samples/phase23_tests.txt` (official Phase 2/3 test suite input file).
-   - Author `docs/phase1_report.md` (official 1–2 page Phase 1 report required by *PDF p. 5*).
+   - Author `docs/phase1_report.md` (official 1-2 page Phase 1 report required by *PDF p. 5*).
    - Author `docs/phase23_report.md` (technical report for Phase 2/3).
 4. **Automated Testing:**
    - Implement `tests/test_symbol_table.py` (≥ 25 unit tests).
@@ -315,7 +315,7 @@ def format_method_type(return_type: MJType, param_types: list[MJType]) -> str:
      - Lexical errors (invalid characters, invalid identifiers, unclosed strings, unclosed comments).
    - In `samples/phase23_tests.txt`: Mini Java test programs with class declarations, loops, conditionals, method calls, type mismatches, and scope errors.
 5. **Author Phase 1 & 2/3 Reports:**
-   - In `docs/phase1_report.md`: Author a 1–2 page technical report complying with *PDF p. 5*:
+   - In `docs/phase1_report.md`: Author a 1-2 page technical report complying with *PDF p. 5*:
      - Section 1: Tokens implemented (reserved keywords, literals, operators, delimiters).
      - Section 2: How errors were handled (line/column tracking, descriptive error messages, non-halting scan).
      - Section 3: Challenges faced and how they were solved (maximal munch for operators, digit-prefixed identifiers, unclosed comments).
@@ -371,4 +371,4 @@ Your task is complete when:
 - `minijava/symbol_table.py` passes all ≥ 25 unit tests in `test_symbol_table.py`.
 - `minijava/mj_types.py` passes all ≥ 20 unit tests in `test_mj_types.py`.
 - `samples/phase1_tests.txt` and `samples/phase23_tests.txt` are created with comprehensive Mini Java test cases.
-- `docs/phase1_report.md` (1–2 pages) and `docs/phase23_report.md` are fully drafted and compliant with *PDF p. 5*.
+- `docs/phase1_report.md` (1-2 pages) and `docs/phase23_report.md` are fully drafted and compliant with *PDF p. 5*.

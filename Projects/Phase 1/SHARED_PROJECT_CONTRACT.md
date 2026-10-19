@@ -1,6 +1,6 @@
-# SHARED PROJECT CONTRACT — Mini Java Compiler: Phase 1 (Lexical Analysis)
+# SHARED PROJECT CONTRACT - Mini Java Compiler: Phase 1 (Lexical Analysis)
 
-**Course:** CSCI415 – Compiler Design (Fall 2026)  
+**Course:** CSCI415 - Compiler Design (Fall 2026)  
 **Contract Version:** 1.0.0-Phase1 (status: FROZEN for Phase 1 Implementation)  
 **Authoritative Specification:** `/home/yousefmahmoudali/Desktop/CompilerProject/Projects/ProjectGuidelinesAndDetails.pdf` (5 pages)  
 **Project Root:** `/home/yousefmahmoudali/Desktop/CompilerProject/`  
@@ -13,7 +13,7 @@
 ## 1. Phase 1 Purpose, Mandatory Requirements & Forward Compatibility
 
 ### 1.1 Purpose
-Build a robust, hand-crafted Lexical Analyzer (Scanner) for **Mini Java** (*PDF p. 1–2*).
+Build a robust, hand-crafted Lexical Analyzer (Scanner) for **Mini Java** (*PDF p. 1-2*).
 
 ### 1.2 Mandatory Phase 1 Requirements (Verified from PDF)
 | ID | Requirement | PDF Page |

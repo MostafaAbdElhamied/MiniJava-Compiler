@@ -14,7 +14,7 @@ You are **Member 2**, the **Lexer Core Engineer and Scanner Loop Architect** for
    - Maintain 1-based sequential cursor navigation: `self.pos`, `self.line = 1`, `self.column = 1`.
    - Implement whitespace skipping (spaces, tabs, newlines, carriage returns).
    - Implement comment skipping: single-line `//` and multi-line `/* ... */`.
-   - Detect and report unterminated multi-line comments (`LEX_UNCLOSED_COMMENT`) starting at the `/*` position (*PDF p. 3–4*).
+   - Detect and report unterminated multi-line comments (`LEX_UNCLOSED_COMMENT`) starting at the `/*` position (*PDF p. 3-4*).
    - Recognize all 9 delimiters from `DELIMITERS` (`(`, `)`, `{`, `}`, `[`, `]`, `;`, `,`, `.`).
    - Detect and report unknown/illegal characters (`LEX_INVALID_CHARACTER` for `@`, `#`, `$`, non-ASCII, lone `&`, lone `|`).
    - Integrate with Member 4's `scanner_ident_num.py` (for identifiers & numbers) and Member 5's `scanner_str_op.py` (for strings & operators).

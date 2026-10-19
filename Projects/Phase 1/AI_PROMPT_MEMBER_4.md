@@ -18,7 +18,7 @@ You are **Member 4**, the **Scanner Specialist for Identifiers, Keywords, Number
    - Strictly avoid regular expressions (`re` module) under course rule REQ-05 (*PDF p. 1*).
 2. **Acceptance & Regression Testing:**
    - Implement `tests/test_scanner_ident_num.py` (≥ 20 focused unit tests).
-   - Implement `tests/test_pdf_examples.py` (validating all code examples and sample programs from PDF pages 3–5).
+   - Implement `tests/test_pdf_examples.py` (validating all code examples and sample programs from PDF pages 3-5).
 
 ---
 
@@ -108,15 +108,15 @@ def scan_identifier_or_number(
    - Test `String` keyword -> `STRING_TYPE`.
    - Test integer numbers (`10`, `0`, `123456`).
    - Test floating-point numbers (`85.5`, `0.0`, `12.34`).
-   - Test numbers followed by delimiters (`10;`, `20)` — must not trigger invalid identifier).
-   - Test invalid identifiers (`1name`, `2_count`, `3abc`) — must emit `LEX_INVALID_IDENTIFIER` with `token=None`.
+   - Test numbers followed by delimiters (`10;`, `20)` - must not trigger invalid identifier).
+   - Test invalid identifiers (`1name`, `2_count`, `3abc`) - must emit `LEX_INVALID_IDENTIFIER` with `token=None`.
 3. **Implement PDF Acceptance Tests (`tests/test_pdf_examples.py`):**
    - Integrate with `tokenize()` from `minijava.lexer`.
    - Test PDF p. 3 invalid character: `int x = 10 @ 5;` -> `Error: invalid character '@' at line 1, column 12.`
    - Test PDF p. 3 invalid identifier: `1name = 5;` -> `Error: invalid identifier '1name' at line 1, column 1.`
    - Test PDF p. 4 unclosed string: `String name = "Ali;` -> `Error: unclosed string literal starting at line 1, column 15.`
    - Test PDF p. 4 unclosed comment: `/* This comment does not end` -> `Error: unclosed comment starting at line 1, column 1.`
-   - Test PDF p. 4–5 sample Mini Java program: assert that all 41 tokens match the exact token types and lexemes specified on PDF pages 4–5.
+   - Test PDF p. 4-5 sample Mini Java program: assert that all 41 tokens match the exact token types and lexemes specified on PDF pages 4-5.
 
 ---
 
@@ -157,4 +157,4 @@ When you finish your implementation, output a report structured with these 10 he
 - `minijava/scanner_ident_num.py` passes all unit tests in `test_scanner_ident_num.py`.
 - Correctly reports `LEX_INVALID_IDENTIFIER` for digit-prefixed identifiers.
 - Correctly registers all identifiers into `IdentifierTable`.
-- `tests/test_pdf_examples.py` passes 100%, demonstrating exact compliance with PDF pages 3–5.
+- `tests/test_pdf_examples.py` passes 100%, demonstrating exact compliance with PDF pages 3-5.

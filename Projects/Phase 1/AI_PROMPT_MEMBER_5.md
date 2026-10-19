@@ -14,7 +14,7 @@ You are **Member 5**, the **Scanner Specialist for Strings, Operators, and Maxim
      - Scan single-quoted (`'...'`) and double-quoted (`"..."`) string literals.
      - Preserve enclosing quotation marks in the token `lexeme`.
      - Support escape sequences: `\n`, `\t`, `\"`, `\'`, `\\`.
-     - Detect and report unclosed string literals (`LEX_UNCLOSED_STRING`) starting at the opening quote position if a newline or EOF occurs before the closing quote (*PDF p. 3–4*).
+     - Detect and report unclosed string literals (`LEX_UNCLOSED_STRING`) starting at the opening quote position if a newline or EOF occurs before the closing quote (*PDF p. 3-4*).
    - Implement `scan_operator()`:
      - Enforce **maximal munch**: match two-character operators (`==`, `!=`, `<=`, `>=`, `&&`, `||`) before single-character operators.
      - Classify operators into `MATHOP` (`+`, `-`, `*`, `/`, `%`), `LOGOP` (`==`, `!=`, `<`, `>`, `<=`, `>=`, `&&`, `||`, `!`), and `ASSIGN` (`=`).
@@ -121,7 +121,7 @@ def scan_operator(
    - Test double-quoted strings (`"Ali"`, `"Hello World"`).
    - Test single-quoted strings (`'A'`, `'x'`).
    - Test string escape sequences (`"Line1\nLine2"`, `"He said \"Hi\""`).
-   - Test unclosed string reaching newline (*PDF p. 3–4*).
+   - Test unclosed string reaching newline (*PDF p. 3-4*).
    - Test unclosed string reaching EOF.
    - Test two-character operators: `==`, `!=`, `<=`, `>=`, `&&`, `||` -> `LOGOP`.
    - Test single-character operators: `+`, `-`, `*`, `/`, `%` -> `MATHOP`.

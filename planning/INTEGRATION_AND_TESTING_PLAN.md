@@ -1,6 +1,6 @@
 # Mini Java Compiler: Integration and Testing Strategy
 
-**Course:** CSCI415 – Compiler Design (Fall 2026)  
+**Course:** CSCI415 - Compiler Design (Fall 2026)  
 **Project Title:** Mini Java Compiler Integration Plan  
 **Authoritative Specification:** `/home/yousefmahmoudali/Desktop/CompilerProject/Projects/ProjectGuidelinesAndDetails.pdf`  
 **Shared Contract:** `/home/yousefmahmoudali/Desktop/CompilerProject/planning/SHARED_PROJECT_CONTRACT.md`  
@@ -40,7 +40,7 @@ flowchart TD
 |---|---|---|---|---|---|
 | **CP-1: Core Contracts** | `minijava/tokens.py`<br>`minijava/diagnostics.py`<br>`minijava/ast_nodes.py`<br>`tests/test_contract.py` | None | 1. Byte-compile with `compileall`<br>2. Run `python3 -m unittest tests.test_contract` | Member 1 | All shared types, enums, and dataclasses defined and verified. Zero syntax errors. |
 | **CP-2: Phase 1 Base** | `minijava/symbol_table.py` (`IdentifierTable`)<br>`tests/helpers.py`<br>`tests/test_symbol_table.py` | CP-1 | 1. Verify `IdentifierTable.add_occurrence`<br>2. Check `format_identifier_table` output formatting | Member 3 (author), Member 1 (review) | `test_symbol_table.py` passes; `helpers.py` provides working CLI harness. |
-| **CP-3: Phase 1 CLI (Lexer)** | `minijava/lexer.py`<br>`minijava/driver.py`<br>`tests/test_lexer.py`<br>`tests/golden/lex/*` | CP-2 | 1. Run unit test suite: `test_lexer.py`<br>2. Run lexer golden suite: `test_golden.py`<br>3. Run CLI: `python3 -m minijava sample.mj --phase lex`<br>4. Compare output to PDF p. 4–5 sample | Member 1 (Lead), Member 2, Member 5 | Lexer outputs exact tokens; reports 4 error types; reproduces PDF sample verbatim; Phase 1 deliverable ready. |
+| **CP-3: Phase 1 CLI (Lexer)** | `minijava/lexer.py`<br>`minijava/driver.py`<br>`tests/test_lexer.py`<br>`tests/golden/lex/*` | CP-2 | 1. Run unit test suite: `test_lexer.py`<br>2. Run lexer golden suite: `test_golden.py`<br>3. Run CLI: `python3 -m minijava sample.mj --phase lex`<br>4. Compare output to PDF p. 4-5 sample | Member 1 (Lead), Member 2, Member 5 | Lexer outputs exact tokens; reports 4 error types; reproduces PDF sample verbatim; Phase 1 deliverable ready. |
 | **CP-4: AST Visualizer** | `minijava/ast_printer.py`<br>`tests/test_ast_printer.py` | CP-1 | 1. Construct mock ASTs and format with `format_ast`<br>2. Verify indentation and label formatting | Member 2 (author), Member 4 (review) | `test_ast_printer.py` passes; formatting conforms to contract §6.9. |
 | **CP-5: Phase 2 CLI (Parser)** | `minijava/parser.py`<br>`tests/test_parser.py`<br>`tests/test_pdf_examples.py`<br>`tests/golden/parse/*` | CP-3, CP-4 | 1. Run parser unit tests: `test_parser.py`<br>2. Run PDF regression tests: `test_pdf_examples.py`<br>3. Run CLI: `python3 -m minijava <file> --phase parse --ast`<br>4. Verify single-error halting and formatted syntax errors | Member 1 (Lead), Member 4, Member 2 | Recursive-descent parser constructs correct ASTs; operator precedence/associativity verified; PDF examples pass. |
 | **CP-6: Phase 3 Foundations** | `minijava/mj_types.py`<br>`ScopedSymbolTable` in `symbol_table.py`<br>`tests/test_mj_types.py` | CP-1, CP-2 | 1. Test assignability, promotion, and operator validity<br>2. Test scope nesting, shadowing, and `lookup_in_method` | Member 3 (author), Member 5 (review) | `test_mj_types.py` and `test_symbol_table.py` pass; type algebra verified. |
@@ -99,7 +99,7 @@ The project employs a five-layer testing pyramid to assure correctness and preve
 - Golden test runner (`tests/test_golden.py`) executes each `.mj` file and compares stdout against `.out` hand-derived oracles.
 
 ### Layer 5: Course Acceptance Suite (`tests/test_pdf_examples.py`, M4)
-- Tests the exact code snippets published in the official course guidelines (*PDF p. 3–5*):
+- Tests the exact code snippets published in the official course guidelines (*PDF p. 3-5*):
   1. `int x = 10 @ 5;` -> expects `Error: invalid character '@' at line 1, column 12.`
   2. `1name = 5;` -> expects `Error: invalid identifier '1name' at line 1, column 1.`
   3. `String name = "Ali;` -> expects `Error: unclosed string literal starting at line 1, column 15.`
@@ -145,7 +145,7 @@ Before final submission for any phase, the team must execute and sign off on the
 - [ ] 8. Submission Artifacts Present:
       - Phase 1 Deliverable 1: Source code in `minijava/` and `tests/`.
       - Phase 1 Deliverable 2: `samples/phase1_tests.txt` present and populated.
-      - Phase 1 Deliverable 3: `docs/phase1_report.md` present (1–2 pages, covering tokens, error handling, challenges).
+      - Phase 1 Deliverable 3: `docs/phase1_report.md` present (1-2 pages, covering tokens, error handling, challenges).
 - [ ] 9. Oral Examination Readiness:
       All 5 team members have conducted a dry-run code walkthrough and can explain their assigned modules.
 ```

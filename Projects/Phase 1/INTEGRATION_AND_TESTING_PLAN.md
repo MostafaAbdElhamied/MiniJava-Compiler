@@ -1,7 +1,7 @@
 # Mini Java Compiler: Phase 1 Integration and Testing Strategy
 
-**Course:** CSCI415 – Compiler Design (Fall 2026)  
-**Project Title:** Mini Java Compiler — Phase 1: Lexical Analysis  
+**Course:** CSCI415 - Compiler Design (Fall 2026)  
+**Project Title:** Mini Java Compiler - Phase 1: Lexical Analysis  
 **Authoritative Specification:** `/home/yousefmahmoudali/Desktop/CompilerProject/Projects/ProjectGuidelinesAndDetails.pdf`  
 **Shared Contract:** `/home/yousefmahmoudali/Desktop/CompilerProject/Projects/Phase 1/SHARED_PROJECT_CONTRACT.md`  
 **Phase 1 Target Deadline:** **October 30, 2026**  
@@ -49,7 +49,7 @@ The Phase 1 quality assurance strategy uses four testing layers:
 
 ```
            ▲
-          / \     Layer 4: Course Acceptance Suite (PDF p. 3–5 Examples)
+          / \     Layer 4: Course Acceptance Suite (PDF p. 3-5 Examples)
          /-----\
         /       \ Layer 3: Independent Golden Test Suite (tests/golden/lex/)
        /---------\
@@ -78,7 +78,7 @@ The Phase 1 quality assurance strategy uses four testing layers:
 - Tests multi-error recovery, complex expressions, mixed comments, and edge cases.
 
 ### Layer 4: Course Acceptance Suite (`tests/test_pdf_examples.py`, M4)
-Tests the exact examples from the official PDF (*PDF p. 3–5*):
+Tests the exact examples from the official PDF (*PDF p. 3-5*):
 1. Invalid character error: `int x = 10 @ 5;` -> `Error: invalid character '@' at line 1, column 12.`
 2. Invalid identifier error: `1name = 5;` -> `Error: invalid identifier '1name' at line 1, column 1.`
 3. Unclosed string error: `String name = "Ali;` -> `Error: unclosed string literal starting at line 1, column 15.`
@@ -107,7 +107,7 @@ Execute and sign off before submitting Phase 1:
 - [ ] 7. Submission Deliverables Present:
       - Source code in `minijava/` and `tests/`.
       - `samples/phase1_tests.txt` present and containing comprehensive test programs.
-      - `docs/phase1_report.md` present (1–2 pages, addressing tokens, error handling, challenges).
+      - `docs/phase1_report.md` present (1-2 pages, addressing tokens, error handling, challenges).
 - [ ] 8. Oral Examination Preparation:
       All 5 team members understand their owned modules and can explain them during the grading interview.
 ```

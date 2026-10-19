@@ -1,7 +1,7 @@
 # Mini Java Compiler: Phase 1 (Lexical Analysis) Requirements Analysis
 
-**Course:** CSCI415 – Compiler Design (Fall 2026)  
-**Project Title:** Mini Compiler for a Java-like Language (Mini Java) — Phase 1: Lexical Analyzer  
+**Course:** CSCI415 - Compiler Design (Fall 2026)  
+**Project Title:** Mini Compiler for a Java-like Language (Mini Java) - Phase 1: Lexical Analyzer  
 **Authoritative Specification:** `/home/yousefmahmoudali/Desktop/CompilerProject/Projects/ProjectGuidelinesAndDetails.pdf` (5 pages)  
 **Project Workspace:** `/home/yousefmahmoudali/Desktop/CompilerProject/`  
 **Phase 1 Working Directory:** `/home/yousefmahmoudali/Desktop/CompilerProject/Projects/Phase 1/`  
@@ -12,14 +12,14 @@
 ## 1. Phase 1 Project Overview
 
 ### 1.1 Objective and Scope
-In Phase 1, the team must design, implement, test, and document a complete **Lexical Analyzer (Scanner)** for the Mini Java programming language (*PDF p. 1–2*).
+In Phase 1, the team must design, implement, test, and document a complete **Lexical Analyzer (Scanner)** for the Mini Java programming language (*PDF p. 1-2*).
 
 The lexical analyzer reads Mini Java source code character by character, skips whitespace and comments, classifies characters into tokens, tracks 1-based source positions (`line` and `column`), constructs an identifier symbol table, and detects/reports lexical errors.
 
 > [!IMPORTANT]
 > **Forward Compatibility Requirement (*PDF p. 1*):**  
 > *"Take into consideration that all phases must be able to build on each other to avoid issues."*  
-> Phase 1 must produce a clean, immutable token stream (`list[Token]`) ending in an `EOF` token that can be consumed directly by the Phase 2 Parser (Nov 21 – Dec 20) without requiring any changes to the Phase 1 scanner.
+> Phase 1 must produce a clean, immutable token stream (`list[Token]`) ending in an `EOF` token that can be consumed directly by the Phase 2 Parser (Nov 21 - Dec 20) without requiring any changes to the Phase 1 scanner.
 
 ---
 
@@ -37,14 +37,14 @@ The lexical analyzer reads Mini Java source code character by character, skips w
    - **Prohibited:** Lex/Flex, ANTLR, PLY, Lark, SLY, PyParsing.
    - **Prohibited:** Python's standard library shortcut modules: `re` (regular expressions), `tokenize`, `ast`, `shlex`. Tokenization must NOT be implemented using `re.finditer()` or naive `str.split()`.
    - **Mandatory:** Pure hand-crafted sequential character scanning using index cursors, lookahead helpers, and character classification.
-3. **Oral Examination & Anti-Plagiarism (*PDF p. 1–2*):**
+3. **Oral Examination & Anti-Plagiarism (*PDF p. 1-2*):**
    - *"A discussion will be held with ALL team members; all members must participate in implementation."*
    - *"ANY PLAGIARISM DETECTED WILL LEAD TO A ZERO AND NO DISCUSSION WILL BE CONDUCTED FOR THE TEAM."*
    - Every one of the 5 team members must write and own code in Phase 1 so they can confidently explain it during the oral grading interview.
 
 ---
 
-### 1.4 Mini Java Lexical Specifications (*PDF p. 2–5*)
+### 1.4 Mini Java Lexical Specifications (*PDF p. 2-5*)
 
 #### Case Sensitivity
 Mini Java is strictly case-sensitive (*PDF p. 2*). Keywords like `class` must not match identifiers like `Class`.
@@ -91,7 +91,7 @@ The language specifies 15 reserved keywords (*PDF p. 2, 4*):
 
 ---
 
-### 1.5 Required Error Handling and Reporting Format (*PDF p. 3–4*)
+### 1.5 Required Error Handling and Reporting Format (*PDF p. 3-4*)
 Every lexical error must include:
 1. 1-based Line number
 2. 1-based Column number
@@ -134,11 +134,11 @@ Every lexical error must include:
 | **REQ-15** | Literals: `NUMBER` (int/float), `STRING`, `BOOLEAN` | Mandatory | p. 2 | `scanner_ident_num.py`, `scanner_str_op.py` | Literal scanning unit tests |
 | **REQ-16** | Operators: `MATHOP`, `LOGOP`, `ASSIGN` (Maximal Munch) | Mandatory | p. 3, 4, 5 | `minijava/scanner_str_op.py` | Two-char vs one-char operator tests |
 | **REQ-17** | Delimiters: `(`, `)`, `{`, `}`, `[`, `]`, `;`, `,`, `.` | Mandatory | p. 3 | `minijava/lexer.py` delimiter table | All 9 delimiter unit tests |
-| **REQ-18** | Detect 4 lexical errors with line, column, description | Mandatory | p. 3, 4 | `minijava/diagnostics.py` templates | Exact string comparison against PDF p. 3–4 |
+| **REQ-18** | Detect 4 lexical errors with line, column, description | Mandatory | p. 3, 4 | `minijava/diagnostics.py` templates | Exact string comparison against PDF p. 3-4 |
 | **REQ-19** | Output format matching `Lexeme: <lex>, Token: <TOK>` | Mandatory | p. 4, 5 | `Token.format()` and `driver.py` | Golden test matching PDF sample output verbatim |
 | **REQ-20** | Phase 1 Deliverable 1: Source code | Mandatory | p. 5 | `minijava/` package | Clean build and test execution |
 | **REQ-21** | Phase 1 Deliverable 2: Input test programs file | Mandatory | p. 5 | `samples/phase1_tests.txt` | File presence and test case diversity check |
-| **REQ-22** | Phase 1 Deliverable 3: 1–2 page technical report | Mandatory | p. 5 | `docs/phase1_report.md` | Report covers tokens, error handling, challenges |
+| **REQ-22** | Phase 1 Deliverable 3: 1-2 page technical report | Mandatory | p. 5 | `docs/phase1_report.md` | Report covers tokens, error handling, challenges |
 
 ---
 
@@ -152,7 +152,7 @@ Every lexical error must include:
    - All token categories (keywords, literals, operators, delimiters).
    - Comments (single-line, multi-line, nested delimiters within comments).
    - Lexical error cases (invalid characters, invalid identifiers, unclosed strings, unclosed comments).
-3. **Brief Report (`docs/phase1_report.md`, 1–2 pages):**
+3. **Brief Report (`docs/phase1_report.md`, 1-2 pages):**
    - **Section 1: Tokens Implemented:** Overview of keywords, literals, operators (`MATHOP`, `LOGOP`, `ASSIGN`), delimiters, and `EOF`.
    - **Section 2: Error Handling:** How 1-based coordinates are tracked, error message structure, and how scanning continues after errors.
    - **Section 3: Challenges Faced & Solutions:** Maximal munch for two-character operators, distinguishing floating-point numbers from dot delimiters, digit-prefixed invalid identifier detection, and unclosed comment tracking.
