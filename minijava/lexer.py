@@ -42,7 +42,7 @@ class Lexer:
                 ))
                 self._advance()
                 
-            elif c.isalpha() or c == '_' or c.isdigit():
+            elif ('a' <= c <= 'z') or ('A' <= c <= 'Z') or c == '_' or ('0' <= c <= '9'):
                 new_pos, new_line, new_col, tok, diag = scan_identifier_or_number(
                     self.source, self.pos, self.line, self.column, self.identifier_table
                 )
@@ -62,8 +62,17 @@ class Lexer:
                 new_pos, new_line, new_col, tok = scan_operator(
                     self.source, self.pos, self.line, self.column
                 )
-                self.pos, self.line, self.column = new_pos, new_line, new_col
-                if tok: self.tokens.append(tok)
+                if tok:
+                    self.pos, self.line, self.column = new_pos, new_line, new_col
+                    self.tokens.append(tok)
+                else:
+                    self.diagnostics.append(make_diagnostic(
+                        ErrorCode.LEX_INVALID_CHARACTER,
+                        line=start_line,
+                        column=start_col,
+                        lexeme=c
+                    ))
+                    self._advance()
                 
             else:
                 self.diagnostics.append(make_diagnostic(
